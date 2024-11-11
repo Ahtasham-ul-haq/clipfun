@@ -25,7 +25,7 @@ const Trendings = () => {
         {isLoading ? (
             <Loader2 />
         ) : (
-            <div className='grid lg:grid-cols-4 md:grid-cols-3 max-sm:grid-cols-1 max-md:grid-cols-2  gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:gap-8 mx-auto'>
                 {gifs.map((gif) => (
                     <GifCard gif={gif} key={gif.id} />
                 ))}
