@@ -27,24 +27,31 @@ const Trendings = () => {
       {isLoading ? (
         <Loader2 />
       ) : (
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4">
+        <div className="columns-1 sm:columns-2 md:columns-3 gap-6 p-4">
           {gifs.map((gif) => (
             <div
               key={gif.id}
-              className="relative mb-4 break-inside-avoid overflow-hidden rounded-3xl shadow-lg group"
+              className="relative mb-6 break-inside-avoid overflow-hidden rounded-none shadow-lg group"
             >
               <img
                 src={gif.images.fixed_width.url}
                 alt={gif.title}
-                className="w-full z-2 h-auto object-cover transition-transform duration-300 hover:scale-1.25"
+                className="w-full z-2 h-auto object-cover transition-transform duration-300 hover:scale-1.25 hover:brightness-50"
               />
               <div className="absolute bottom-4 left-4 hidden group-hover:block">
-                <p className="text-sm text-gray-600">
-                  Uploaded by: {gif.username || "Unknown"}
+                <p className="font-xl font-semibold text-white">{gif.title}</p>
+                <div className="flex">
+                  {gif.user?.avatar_url ? (
+                    <img src={gif.user.avatar_url} alt="" width={20} height={20} />
+                  ) : (
+                    // <img src="" alt="" />
+                    <></>
+                  )}
+                <p className="text-sm text-white">
+                  {gif.username || "Anonymous"}
                 </p>
-                <p className="text-sm text-gray-600">
-                  Rating: {gif.rating.toUpperCase()}
-                </p>
+                </div>
+
               </div>
             </div>
           ))}
