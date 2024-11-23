@@ -2,7 +2,14 @@
 
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import GifCard from "@/components/GifCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Trendings = () => {
   const [gifs, setGifs] = useState([]);
@@ -29,31 +36,40 @@ const Trendings = () => {
       ) : (
         <div className="columns-1 sm:columns-2 md:columns-3 gap-6 p-4">
           {gifs.map((gif) => (
-            <div
-              key={gif.id}
-              className="relative mb-6 break-inside-avoid overflow-hidden rounded-none shadow-lg group"
-            >
-              <img
-                src={gif.images.fixed_width.url}
-                alt={gif.title}
-                className="w-full z-2 h-auto object-cover transition-transform duration-300 hover:scale-1.25 hover:brightness-50"
-              />
-              <div className="absolute bottom-4 left-4 hidden group-hover:block">
-                <p className="font-xl font-semibold text-white">{gif.title}</p>
-                <div className="flex">
-                  {gif.user?.avatar_url ? (
-                    <img src={gif.user.avatar_url} alt="" width={20} height={20} />
-                  ) : (
-                    // <img src="" alt="" />
-                    <></>
-                  )}
-                <p className="text-sm text-white">
-                  {gif.username || "Anonymous"}
-                </p>
-                </div>
-
-              </div>
-            </div>
+                  <div className="relative break-inside-avoid mb-6 overflow-hidden rounded-none shadow-lg group cursor-pointer">
+                    <img
+                      src={gif.images.fixed_width.url}
+                      alt={gif.title}
+                      className="w-full z-2 h-auto object-cover transition-transform duration-300 group-hover:brightness-50"
+                    />
+                    <div className="absolute bottom-4 left-4 hidden group-hover:block">
+                      <p className="text-[1rem] font-semibold text-white line-clamp-1 pr-2 mb-2">
+                        {gif.title}
+                      </p>
+                      <div className="flex items-center gap-2">
+                        {gif.user?.avatar_url ? (
+                          <img
+                            src={gif.user.avatar_url}
+                            width={30}
+                            height={30}
+                            alt=""
+                            className="rounded-full"
+                          />
+                        ) : (
+                          <img
+                            src={"/profile.svg"}
+                            width={30}
+                            height={30}
+                            alt="profile"
+                            className="text-white"
+                          />
+                        )}
+                        <p className="text-sm text-white">
+                          {gif.username || "Anonymous"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
           ))}
         </div>
       )}
